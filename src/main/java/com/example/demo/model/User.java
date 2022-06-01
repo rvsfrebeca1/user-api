@@ -1,12 +1,6 @@
 package com.example.demo.model;
-
-import java.time.LocalDate;
-
 import javax.persistence.*;
 
-
-//usuários (id, nome, CPF, telefone, data nascimento,
-//email)
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,12 +19,12 @@ public class User {
 	private String telephone;
 
     @Column(name = "birth_date", nullable = false)
-    private LocalDate birthDate;
+    private String birthDate;
 
 	@Column(name="email", length = 50, nullable = false, unique = true)
 	private String email;
 
-    public User(Integer id, String name, String cpf, String telephone, LocalDate birthDate, String email) {
+    public User(Integer id, String name, String cpf, String telephone, String birthDate, String email) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -38,7 +32,9 @@ public class User {
         this.birthDate = birthDate;
         this.email = email;
     }
+    public User(){
 
+    }
     public Integer getId() {
         return id;
     }
@@ -71,11 +67,11 @@ public class User {
         this.telephone = telephone;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -86,7 +82,10 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    @Override
+    public String toString() {
+        return "User [birthDate=" + birthDate + ", cpf=" + cpf + ", email=" + email + ", id=" + id + ", name=" + name
+                + ", telephone=" + telephone + "]";
+    }
 
-    
-	
 }

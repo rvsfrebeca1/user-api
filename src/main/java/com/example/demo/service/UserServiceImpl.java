@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import java.util.List;
 
+
 import com.example.demo.dao.UserDAO;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,34 +17,33 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public User createUser(User novo) {
+        
         try {
             dao.save(novo);
             return novo;
-            
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
+            return null;
+        }
+        
+    }
+
+    @Override
+    public List<UserDTO> readUsers() {
+        try {
+            return dao.getUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
 
     @Override
-    public List<User> readUsers() {
+    public UserDTO readByIdUser(Integer id) {
         try {
-            return (List<User>) dao.findAll();
-            
+            return dao.getUserById(id);
         } catch (Exception e) {
-            //TODO: handle exception
-            return null;
-        }
-    }
-
-    @Override
-    public User readByIdUser(Integer id) {
-        try {
-            return dao.findById(id).orElse(null);
-
-        } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
             return null;
         }
     }
@@ -52,7 +53,7 @@ public class UserServiceImpl implements IUserService{
         try {
             return dao.save(user);
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
             return null;
         }
     }
@@ -63,9 +64,7 @@ public class UserServiceImpl implements IUserService{
         try {
             dao.deleteById(id);
             return true;
-
         } catch (Exception e) {
-            //TODO: handle exception
             return false;
         }
        

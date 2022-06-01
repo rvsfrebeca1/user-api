@@ -4,6 +4,6 @@ CREATE TABLE users(
   name varchar(100) not null,
   cpf varchar(11) not null unique,
   telephone varchar(11) not null,
-  birth_date date not null,
+  birth_date varchar(20) not null,
   email varchar(50) not null unique
 );

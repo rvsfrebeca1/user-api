@@ -1,8 +1,11 @@
 package com.example.demo.controller;
+
+
 import java.util.List;
+
+import com.example.demo.dto.UserDTO;
 import com.example.demo.model.User;
 import com.example.demo.service.IUserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,27 +17,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UsuarioController {
+public class UserController {
     
     @Autowired
     private IUserService service;
 
-
     @GetMapping("/")
     public ResponseEntity<String> helloWorld() {
         return ResponseEntity.ok("Welcome to User API");
-
     }
 
     @GetMapping("/read")
-    public ResponseEntity<List<User>> getUsers(){
-        return ResponseEntity.ok(service.readUsers());
+    public List<UserDTO> getUsers(){
+        return service.readUsers();
+    }
+
+    @GetMapping("/read/{id}")
+    public UserDTO getUserById(@PathVariable Integer id){
+        return service.readByIdUser(id);
     }
 
     @DeleteMapping("/delete/{id}")
     public Boolean deleteUser(@PathVariable Integer id){
         return service.deleteUser(id);
-
     }
 
     @PostMapping("/create/")
