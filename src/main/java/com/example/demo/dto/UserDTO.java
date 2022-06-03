@@ -1,14 +1,24 @@
 package com.example.demo.dto;
 
 public class UserDTO {
+    private Integer id;
     private String email;
     private String telephone;
     private String birthDate;
 
-    public UserDTO(String email, String telephone, String birthDate) {
+    public UserDTO(Integer id, String email, String telephone, String birthDate) {
+        this.id = id;
         this.email = email;
         this.telephone = telephone;
         this.birthDate = birthDate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public UserDTO(){
