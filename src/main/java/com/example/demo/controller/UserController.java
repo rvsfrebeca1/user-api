@@ -2,8 +2,8 @@ package com.example.demo.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
-import com.example.demo.dto.UserDTO;
 import com.example.demo.model.User;
 import com.example.demo.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +28,12 @@ public class UserController {
     }
 
     @GetMapping("/read")
-    public List<UserDTO> getUsers(){
+    public List<User> getUsers(){
         return service.readUsers();
     }
 
     @GetMapping("/read/{id}")
-    public UserDTO getUserById(@PathVariable Integer id){
+    public Optional<User> getUserById(@PathVariable Integer id){
         return service.readByIdUser(id);
     }
 
@@ -51,12 +51,5 @@ public class UserController {
     public User updatUser (@RequestBody User user){
         return service.updateUser(user);
     }
-
-
-
-
-   
-
-
    
 }

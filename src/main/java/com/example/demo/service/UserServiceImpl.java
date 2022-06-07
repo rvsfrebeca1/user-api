@@ -1,10 +1,9 @@
 package com.example.demo.service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import com.example.demo.dao.UserDAO;
-import com.example.demo.dto.UserDTO;
 import com.example.demo.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +28,9 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public List<UserDTO> readUsers() {
+    public List<User> readUsers() {
         try {
-            return dao.getUsers();
+            return (List<User>) dao.findAll();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -39,9 +38,9 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public UserDTO readByIdUser(Integer id) {
+    public Optional<User> readByIdUser(Integer id) {
         try {
-            return dao.getUserById(id);
+            return dao.findById(id);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
